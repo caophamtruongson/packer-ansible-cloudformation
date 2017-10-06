@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "CloudFormationDemo"
+Parameters:
+  ImageIdParameter:
+    Type: String
+    Description: Enter ImageId.
+  InstanceTypeParameter:
+    Type: String
+    Default: t2.small
+    AllowedValues:
+      - t2.micro
+      - t2.small
+      - t2.medium
+      - t2.large
+    Description: Enter t2.micro, t2.small, t2.medium, t2.large. Default is t2.small.
+  KeyNameParameter:
+    Type: String
+    Description: Enter the name of key pairs for EC2 SSH.
+  SecurityGroupParameter:
+    Type: String
+    Description: Enter the name of security group.
+  NameTag:
+    Type: String
+    Description: Enter the name tag for instance.
+Resources:
+  InstancesSetup:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      ImageId:
+        Ref: ImageIdParameter
+      InstanceType:
+        Ref: InstanceTypeParameter
+      KeyName:
+        Ref: KeyNameParameter
+      SecurityGroups:
+        - Ref: SecurityGroupParameter
+      Tags:
+        - Key: "Name"
+          Value:
+            Ref: NameTag

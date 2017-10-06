@@ -1,0 +1,16 @@
+---
+- hosts: all
+  sudo : true
+  tasks:
+    - name: PHP packages installation - Version 7.1
+      yum: pkg={{item}} state=latest
+      with_items:
+          - php71
+          - php71-cli
+          - php71-common
+          - php71-devel
+          - php71-gd
+          - php71-mbstring
+          - php71-pdo
+          - php71-pecl-apcu
+          - php71-xml
